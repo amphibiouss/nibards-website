@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Nibards.fr</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .oeuvre-card { border: 1px solid #ccc; margin: 10px; padding: 10px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Test de chargement des œuvres</h1>
+    <div id="status"></div>
+    <div id="oeuvres-container"></div>
+
+    <script>
+        async function testLoadOeuvres() {
+            const status = document.getElementById('status');
+            const container = document.getElementById('oeuvres-container');
+            
+            try {
+                status.innerHTML = '<p class="success">Tentative de chargement...</p>';
+                console.log('Test de chargement des œuvres...');
+                
+                const response = await fetch('data/oeuvres.json');
+                console.log('Réponse:', response);
+                console.log('Status:', response.status);
+                console.log('OK:', response.ok);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Données reçues:', data);
+                
+                status.innerHTML = `<p class="success">✅ ${data.oeuvres.length} œuvres chargées avec succès!</p>`;
+                
+                data.oeuvres.forEach(oeuvre => {
+                    const card = document.createElement('div');
+                    card.className = 'oeuvre-card';
+                    card.innerHTML = `
+                        <h3>${oeuvre.titre}</h3>
+                        <p><strong>Date:</strong> ${oeuvre.date}</p>
+                        <p><strong>Catégorie:</strong> ${oeuvre.categorie}</p>
+                        <img src="${oeuvre.image}" alt="${oeuvre.titre}" style="max-width: 200px;">
+                    `;
+                    container.appendChild(card);
+                });
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                status.innerHTML = `<p class="error">❌ Erreur: ${error.message}</p>`;
+            }
+        }
+        
+        // Lancer le test au chargement de la page
+        document.addEventListener('DOMContentLoaded', testLoadOeuvres);
+    </script>
+</body>
+</html>

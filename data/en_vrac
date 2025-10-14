@@ -1,0 +1,70 @@
+
+{
+  "oeuvres": [
+    {
+      "id": "laitiere-apocalypse",
+      "titre": "La Laitière de l’Apocalypse",
+      "date": "v. 1399",
+      "origine": "Scriptorium de l’Abbaye de Saint-Crème-sur-Veinard",
+      "support": "Enluminure sur parchemin humain, pigments végétaux et lait séché",
+      "dimensions": "34 cm x 22 cm",
+      "salle": "Enfers Lactés - Manuscrits Déviants, aile Nord",
+      "description": "Cette scène apocalyptique illustre un ange aux seins hypertrophiés projetant un lait enflammé sur une foule de damnés paniqués. L’iconographie mêle horreur médiévale et vénération du mamelon comme outil divin de purification par l’absurde.",
+      "analyse": "Le lait, ici, n’est plus nourricier : il devient jugement. La symbolique inversée du sein (source de vie devenant feu céleste) reflète la tension eschatologique entre grâce et punition. Certains exégètes parlent de \"Jugement Tétinal Dernier\".",
+      "funFact": "Une annotation marginale du moine copiste indique : « Ce sein m’a parlé cette nuit. Il voulait brûler Rome. »",
+      "audioGuide": "assets/audio/Laitiere_Apocalypse.mp3",
+      "image": "assets/img/Laitiere_Apocalypse.png",
+      "categorie": "Manuscrits mystico-mammaires"
+    },
+    {
+      "id": "soutif-jeanne",
+      "titre": "Le Soutien-Gorge de Guerre de Jeanne d’Arc",
+      "date": "1431",
+      "origine": "Champ de bataille de Patay (relique récupérée dans une flaque sacrée)",
+      "support": "Fer bénit, os de mouton, ficelle de couvent",
+      "dimensions": "90 cm x 38 cm (extensible)",
+      "salle": "Textiles Héroïques - Dévotion & Corseterie, crypte Est",
+      "description": "Cette pièce d’armure très personnelle aurait été portée par Jeanne d’Arc pour \"tenir ses globes divins en paix pendant la guerre contre les Anglais\". Le soutien-gorge présente des renforts acérés pour bloquer les flèches hérétiques.",
+      "analyse": "Certains historiens y voient une métaphore de la féminité protégée face au patriarcat médiéval ; d'autres, un simple accessoire badass. Gravé intérieurement : « Gloire au Téton de Dieu ».",
+      "funFact": "Une tentative de reproduction moderne a causé une hernie à un cascadeur d’Arte. L’objet reste classé « port interdit » par le Vatican.",
+      "audioGuide": "assets/audio/Soutif_Jeanne.mp3",
+      "image": "assets/img/Soutif_Jeanne.png",
+      "categorie": "Armures & saints nichons"
+    },
+    {
+      "id": "teton-azyme",
+      "titre": "Le Téton Azyme de la Dernière Tarte",
+      "date": "32 ap. J.-C.",
+      "origine": "Cuisine sacrée de Béthanie, recette perdue",
+      "support": "Pain non levé, téton fossile, miel béni",
+      "dimensions": "18 cm de diamètre",
+      "salle": "Patrimoine Boulangéro-Théologique - Chapelle du Levain Sacré",
+      "description": "Cette galette plate présente une excroissance centrale en forme de mamelon parfait. Le pain, retrouvé dans une urne à côté d’un évangile non canonique, aurait été « la dernière tarte partagée par Jésus et Marie-Madeleine, bénie par accident ». Une miette conserve l’empreinte d’une canine de saint Thomas.",
+      "analyse": "Le sein devient ici pain de vie, poitrine eucharistique. C’est une téton-hostie, invitation au mystère sacré de la digestion céleste. D’aucuns parlent de \"gluten mystique\".",
+      "funFact": "Lors de son analyse en laboratoire, le pain a brièvement vibré en émettant un son aigu ressemblant à un cri de nourrisson. Il a depuis été classé « instable ».",
+      "audioGuide": "assets/audio/Teton_Azyme.mp3",
+      "image": "assets/img/Teton_Azyme.png",
+      "categorie": "Artefacts comestibles sacrés"
+    }
+  ]
+}
+
+{
+  "oeuvres": [
+    {
+      "id": "saint-teton-pierre",
+      "titre": "Le Saint Téton de Saint-Pierre",
+      "date": "Ier siècle ap. J.-C. (réémergence au XIIe siècle)",
+      "origine": "Transféré de Judée à Rome par le moine Théodule le Glandu, conservé au Vatican jusqu’en 1894",
+      "support": "Or sculpté, relique ossifiée, fragment de tissu sacré",
+      "dimensions": "14 cm x 11 cm x 7 cm",
+      "salle": "Trésors Sacrés - Crypte mammaire, aile Sud",
+      "description": "Le Saint Téton de Saint-Pierre est une relique chrétienne rarissime, censée être une prothèse mammaire portée par l’apôtre Pierre durant ses années de mission déguisé à Antioche, à une époque où il prêchait l’égalité des sexes en pratiquant l’ascèse en travestissement. La relique consiste en un téton doré enchâssé dans un reliquaire gothique, flanqué de deux mini chérubins nus tenant chacun une pince à linge sacrée. L’artefact aurait été redécouvert dans une crypte secrète sous la basilique Saint-Pierre, dans un compartiment étiqueté “Mamilla Sancta - ne pas toucher (même avec foi)”.",
+      "analyse": "Dans les textes apocryphes attribués à Saint Barnabé le Coussiné, il est mentionné que Pierre, lors d’une révélation, reçut “un sein de lumière” lui permettant d’allaiter spirituellement ses disciples. Certains théologiens modernes considèrent cela comme la métaphore ultime de la transmission de la parole divine à travers un canal nourricier, fluide et un peu lacté.",
+      "funFact": "Le téton fut brièvement exposé lors du Concile de Latran (1215), mais retiré de la vue publique après qu’un moine franciscain l’ait embrassé 27 fois d’affilée, criant qu’il avait “reçu le lait du Verbe”.",
+      "audioGuide": "assets/audio/Saint_Teton_Pierre.mp3",
+      "image": "assets/img/Saint_Teton_Pierre.png",
+      "categorie": "Reliques mammaires sacrées"
+    }
+  ]
+}

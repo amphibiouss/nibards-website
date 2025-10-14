@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nibards.fr | Musée Virtuel d'Art Absurde</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header class="main-header">
+        <nav>
+            <div class="logo">Nibards.fr</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Accueil</a>
+                <a href="oeuvres.html">Collection</a>
+            </div>
+        </nav>
+    </header>
+
+    <main data-scroll-container>
+        <section class="hero" data-scroll-section>
+            <div class="hero-content">
+                <h1 class="reveal-text">Bienvenue au Musée Virtuel des Nibards</h1>
+                <p class="subtitle reveal-text">Une exploration surréaliste de l'art à travers les âges</p>
+                <a href="oeuvres.html" class="cta-button">Découvrir la Collection</a>
+            </div>
+        </section>
+
+        <section class="intro" data-scroll-section>
+            <div class="intro-content">
+                <h2>Une Expérience Muséale Unique</h2>
+                <p>Plongez dans un univers où l'absurde rencontre l'excellence artistique. Notre collection, soigneusement sélectionnée, vous invite à redécouvrir l'histoire de l'art sous un angle inédit.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Nibards.fr - Musée Virtuel d'Art Absurde</p>
+    </footer>
+
+    <script src="https://unpkg.com/locomotive-scroll"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
