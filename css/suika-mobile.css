@@ -1,0 +1,621 @@
+/* Suika Boobs - Interface Mobile avec Gyroscope */
+/* Version: 1.0 - Interface mobile repensée */
+
+/* Variables CSS */
+:root {
+    --color-bg: #0a0a0a;
+    --color-text: #f5f5f5;
+    --color-text-muted: #aaaaaa;
+    --color-accent: #ff6b6b;
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-display: 'Playfair Display', serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Interface Mobile */
+.game-mobile-interface {
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header Mobile */
+.game-mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 10;
+}
+
+.game-mobile-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.game-mobile-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.game-mobile-stat-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.game-mobile-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    font-family: var(--font-display);
+}
+
+.game-mobile-next {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.game-mobile-next-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.game-mobile-next-ball {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+/* Zone de jeu mobile */
+.game-mobile-canvas-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    margin: var(--spacing-md);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+#gameCanvas {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Indicateur de position gyroscope */
+.game-gyro-indicator {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.game-gyro-indicator.active {
+    opacity: 1;
+}
+
+.game-gyro-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.game-gyro-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    transform: translate(-50%, -50%);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Contrôles mobiles */
+.game-mobile-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--color-border);
+}
+
+.game-mobile-drop-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, var(--color-accent), #ff8a8a);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    min-width: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-mobile-drop-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.game-mobile-drop-btn:hover::before {
+    left: 100%;
+}
+
+.game-mobile-drop-btn:active {
+    transform: scale(0.95);
+    box-shadow: var(--shadow-sm);
+}
+
+.game-mobile-drop-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.game-mobile-drop-icon {
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.game-mobile-drop-btn:hover .game-mobile-drop-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.game-mobile-drop-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.game-mobile-rotate-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+.game-mobile-rotate-btn:hover {
+    background: rgba(255, 107, 107, 0.2);
+    border-color: var(--color-accent);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.game-mobile-rotate-btn:active {
+    transform: scale(0.95);
+}
+
+.game-mobile-rotate-icon {
+    transition: var(--transition);
+}
+
+.game-mobile-rotate-btn:hover .game-mobile-rotate-icon {
+    transform: rotate(180deg);
+}
+
+/* Guide gyroscope */
+.game-gyro-guide {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.game-gyro-guide.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.game-gyro-guide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.game-gyro-guide-icon {
+    font-size: 3rem;
+    animation: bounce 2s infinite;
+}
+
+.game-gyro-guide-text {
+    color: var(--color-text);
+}
+
+.game-gyro-guide-text strong {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-accent);
+}
+
+.game-gyro-guide-text p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Interface Desktop (cachée sur mobile) */
+.game-desktop-interface {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    min-height: 100vh;
+    background: var(--color-bg);
+}
+
+/* Sidebar gauche - Scores */
+.game-sidebar-left {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.game-stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.game-stat-label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.game-stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+}
+
+.game-stat-value-small {
+    font-size: 1.5rem;
+}
+
+/* Zone centrale - Jeu */
+.game-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.game-next-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    backdrop-filter: blur(10px);
+}
+
+.game-next-label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.game-next-ball {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.game-canvas-container {
+    position: relative;
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Sidebar droite - Évolutions */
+.game-sidebar-right {
+    width: 250px;
+    padding: 1rem;
+}
+
+.game-evolution-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.game-evolution-label {
+    font-size: 1rem;
+    color: var(--color-text);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.game-evolution-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.game-evolution-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition);
+}
+
+.game-evolution-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.game-evolution-icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.game-evolution-text {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.game-evolution-points {
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-mobile-interface {
+        display: flex;
+    }
+    
+    .game-desktop-interface {
+        display: none;
+    }
+    
+    .game-mobile-canvas-container {
+        margin: var(--spacing-sm);
+    }
+    
+    .game-mobile-controls {
+        padding: var(--spacing-md);
+        gap: var(--spacing-md);
+    }
+    
+    .game-mobile-drop-btn {
+        min-width: 100px;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .game-mobile-rotate-btn {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-mobile-header {
+        padding: var(--spacing-sm);
+    }
+    
+    .game-mobile-stats {
+        gap: var(--spacing-md);
+    }
+    
+    .game-mobile-stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .game-mobile-next-ball {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .game-mobile-controls {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .game-mobile-drop-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* Animations d'entrée */
+.game-mobile-interface {
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* États du jeu */
+.game-mobile-drop-btn.dropping {
+    background: linear-gradient(135deg, var(--color-success), #4ade80);
+    animation: dropPulse 0.3s ease;
+}
+
+@keyframes dropPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.game-mobile-drop-btn:disabled {
+    background: linear-gradient(135deg, #666, #888);
+    cursor: not-allowed;
+}
+
+/* Feedback visuel */
+.game-mobile-drop-btn.success {
+    background: linear-gradient(135deg, var(--color-success), #4ade80);
+    animation: successPulse 0.5s ease;
+}
+
+@keyframes successPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: var(--shadow-md);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(74, 222, 128, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: var(--shadow-md);
+    }
+}

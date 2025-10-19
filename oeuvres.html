@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collection | Nibards.fr</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <link rel="stylesheet" href="css/collection.css">
+    <link rel="stylesheet" href="css/navigation.css?v=2.0">
+    <link rel="icon" type="image/png" href="nibard1.png">
+    <link rel="shortcut icon" type="image/png" href="nibard1.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Curseur personnalisé -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
@@ -19,59 +24,105 @@
             <div class="nav-links">
                 <a href="index.html">Accueil</a>
                 <a href="oeuvres.html" class="active">Collection</a>
+                <a href="podcast.html">Podcast</a>
+                <a href="minijeux.html">Mini Jeux</a>
             </div>
+            
+            <!-- Bouton Menu Mobile -->
+            <button class="nav__menu-toggle" id="nav-menu-toggle" aria-label="Menu">
+                ☰
+            </button>
         </nav>
+        
+        <!-- Menu Mobile -->
+        <div class="nav__mobile" id="nav-mobile">
+            <button class="nav__mobile-close-btn" id="nav-mobile-close">✕</button>
+            <div class="nav__mobile-content">
+                <div class="nav__mobile-links">
+                    <a href="index.html" class="nav__mobile-link">
+                        <span class="nav__mobile-icon">🏠</span>
+                        <span>Accueil</span>
+                    </a>
+                    <a href="oeuvres.html" class="nav__mobile-link nav__mobile-link--active">
+                        <span class="nav__mobile-icon">🎨</span>
+                        <span>Collection</span>
+                    </a>
+                    <a href="podcast.html" class="nav__mobile-link">
+                        <span class="nav__mobile-icon">🎧</span>
+                        <span>Podcast</span>
+                    </a>
+                    <a href="minijeux.html" class="nav__mobile-link">
+                        <span class="nav__mobile-icon">🎮</span>
+                        <span>Mini Jeux</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="collection-header">
-            <h1 class="reveal-text">Nos collections</h1>
-            <section class="filters-section">
-                <div class="filters">
-                    <button class="filter-btn active" data-filter="all">Toutes les œuvres</button>
-                    <button class="filter-btn" data-filter="Antiquité">Antiquité</button>
-                    <button class="filter-btn" data-filter="Cubisme">Cubisme</button>
-                    <button class="filter-btn" data-filter="Manuscrits mystico-mammaires">Manuscrits</button>
-                    <button class="filter-btn" data-filter="Armures & saints nichons">Armures</button>
-                    <button class="filter-btn" data-filter="Artefacts comestibles sacrés">Artefacts</button>
-                    <button class="filter-btn" data-filter="Reliques mammaires sacrées">Reliques</button>
-                </div>
-            </section>
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero__title">Nos collections</h1>
+            <p class="hero__subtitle">Découvrez notre musée virtuel d'art absurde</p>
         </section>
 
-        <section class="oeuvres-grid">
-            <div class="oeuvres-container">
-                <!-- Les œuvres seront chargées dynamiquement via JavaScript -->
+        <!-- Filters -->
+        <section class="filters">
+            <div class="filters__container">
+                <button class="filter-btn filter-btn--active" data-filter="all">Toutes les œuvres</button>
+                <button class="filter-btn" data-filter="Antiquité">Antiquité</button>
+                <button class="filter-btn" data-filter="Cubisme">Cubisme</button>
+                <button class="filter-btn" data-filter="Manuscrits mystico-mammaires">Manuscrits</button>
+                <button class="filter-btn" data-filter="Armures & saints nichons">Armures</button>
+                <button class="filter-btn" data-filter="Artefacts comestibles sacrés">Artefacts</button>
+                <button class="filter-btn" data-filter="Reliques mammaires sacrées">Reliques</button>
             </div>
         </section>
 
-        <div class="oeuvre-detail" id="oeuvre-detail">
-            <div class="detail-content">
-                <button class="close-btn">&times;</button>
-                <div class="detail-image">
-                    <img src="" alt="">
+        <!-- Artworks Grid -->
+        <section class="artworks">
+            <div class="artworks__container" id="artworks-container">
+                <!-- Les œuvres seront chargées ici -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Artwork Detail Modal -->
+    <div class="modal" id="artwork-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__content">
+            <button class="modal__close" id="modal-close">&times;</button>
+            <div class="modal__image">
+                <img id="modal-image" src="" alt="">
+            </div>
+            <div class="modal__info">
+                <h2 id="modal-title"></h2>
+                <div class="audio-guide">
+                    <button class="audio-guide__btn" id="audio-guide-btn">
+                        <span class="audio-guide__icon">▶</span>
+                        <span class="audio-guide__text">Audioguide</span>
+                    </button>
                 </div>
-                <div class="detail-info">
-                    <h2></h2>
-                    <div class="metadata"></div>
-                    <div class="description"></div>
-                    <div class="analyse"></div>
-                    <div class="fun-fact"></div>
-                </div>
-                <audio class="audio-guide" controls>
+                <div id="modal-metadata"></div>
+                <div id="modal-description"></div>
+                <div id="modal-analysis"></div>
+                <div id="modal-funfact"></div>
+                <audio id="modal-audio" preload="none">
                     <source src="" type="audio/mpeg">
-                    Votre navigateur ne supporte pas l'élément audio.
                 </audio>
             </div>
         </div>
-    </main>
+    </div>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="footer">
         <p>&copy; 2025 Nibards.fr - Musée Virtuel d'Art Absurde</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/oeuvres.js"></script>
+    <!-- Scripts -->
+    <script src="js/navigation.js?v=2.0"></script>
+    <script src="js/collection.js"></script>
 </body>
 </html>

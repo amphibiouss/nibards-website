@@ -1,0 +1,22 @@
+{
+  "episodes": [
+    {
+      "title": "Nibards Quantiques : Multivers Voraces",
+      "episode": 1,
+      "date": "2025-10-17",
+      "guests": ["Professeur Lactarius", "Dr. Boobalina Quark","Artiste Nebula Tittoria","Historien temporel Mammary Joe"],
+      "description": "Premier épisode de notre podcast où nous explorons l'histoire fascinante des nibards dans l'art et la culture. Discussions avec nos premiers invités sur ce sujet passionnant.",
+      "audio": "assets/podcast/audio/episode-01.mp3",
+      "cover": "assets/podcast/covers/episode-01.jpeg"
+    },
+    {
+      "title": "Les Nibards dans l'Art Renaissance",
+      "episode": 2,
+      "date": "2025-01-22",
+      "guests": ["Sophie Martin", "Pierre Historien"],
+      "description": "Une plongée dans la Renaissance italienne et française, où nous découvrons comment les artistes ont représenté les nibards avec grâce et symbolisme.",
+      "audio": "assets/podcast/audio/episode-02.mp3",
+      "cover": "assets/podcast/covers/episode-02.jpg"
+    }
+  ]
+}

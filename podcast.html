@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast | Nibards.fr</title>
+    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <link rel="stylesheet" href="css/navigation.css?v=2.0">
+    <link rel="icon" type="image/png" href="nibard1.png">
+    <link rel="shortcut icon" type="image/png" href="nibard1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="podcast-page">
+    <!-- <div class="cursor"></div>
+    <div class="cursor-follower"></div> -->
+
+    <header class="main-header">
+        <nav>
+            <div class="logo">Nibards.fr</div>
+            <div class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="oeuvres.html">Collection</a>
+                <a href="podcast.html" class="active">Podcast</a>
+                <a href="minijeux.html">Mini Jeux</a>
+            </div>
+            
+            <!-- Bouton Menu Mobile -->
+            <button class="nav__menu-toggle" id="nav-menu-toggle" aria-label="Menu">
+                ☰
+            </button>
+        </nav>
+        
+        <!-- Menu Mobile -->
+        <div class="nav__mobile" id="nav-mobile">
+            <button class="nav__mobile-close-btn" id="nav-mobile-close">✕</button>
+            <div class="nav__mobile-content">
+                <div class="nav__mobile-links">
+                    <a href="index.html" class="nav__mobile-link">
+                        <span class="nav__mobile-icon">🏠</span>
+                        <span>Accueil</span>
+                    </a>
+                    <a href="oeuvres.html" class="nav__mobile-link">
+                        <span class="nav__mobile-icon">🎨</span>
+                        <span>Collection</span>
+                    </a>
+                    <a href="podcast.html" class="nav__mobile-link nav__mobile-link--active">
+                        <span class="nav__mobile-icon">🎧</span>
+                        <span>Podcast</span>
+                    </a>
+                    <a href="minijeux.html" class="nav__mobile-link">
+                        <span class="nav__mobile-icon">🎮</span>
+                        <span>Mini Jeux</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="podcast-main">
+        <!-- Hero avec dernier épisode -->
+        <section class="podcast-hero-episode" id="hero-episode">
+            <div class="hero-episode-content">
+                <p class="episode-label">DERNIER ÉPISODE</p>
+                <h1 class="episode-title" id="hero-title">Chargement...</h1>
+                <p class="episode-meta" id="hero-meta">• </p>
+                
+                <div class="hero-player">
+                    <div class="hero-cover">
+                        <img id="hero-cover" src="" alt="Pochette de l'épisode">
+                    </div>
+                    
+                    <div class="player-controls-hero">
+                        <input type="range" class="progress-bar" id="hero-seek" min="0" max="100" value="0" step="0.1">
+                        <div class="time-display">
+                            <span class="time" id="hero-current">0:00</span>
+                            <span class="time" id="hero-duration">0:00</span>
+                        </div>
+                        <button class="play-button-hero" id="hero-play">
+                            <svg class="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="pause-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                                <path d="M6 4h4v16H6zm8 0h4v16h-4z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <p class="episode-description" id="hero-description"></p>
+            </div>
+        </section>
+
+        <!-- Liste des épisodes précédents -->
+        <section class="previous-episodes">
+            <h2>ÉPISODES PRÉCÉDENTS</h2>
+            <div class="episodes-list-simple" id="episodes-list">
+                <!-- Episodes chargés dynamiquement -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nibards.fr - Musée Virtuel d'Art Absurde</p>
+    </footer>
+
+    <audio id="main-audio" preload="metadata"></audio>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/navigation.js?v=2.0"></script>
+    <script src="js/main.js?v=3"></script>
+    <script src="js/podcast.js?v=3"></script>
+</body>
+</html>

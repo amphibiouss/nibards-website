@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À qui le téton ? | Nibards.fr</title>
+    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <link rel="stylesheet" href="css/navigation.css?v=2.0">
+    <link rel="stylesheet" href="css/quiz.css?v=1.0">
+    <link rel="icon" type="image/png" href="nibard1.png">
+    <link rel="shortcut icon" type="image/png" href="nibard1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="game-body">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header minimaliste -->
+    <header class="game-header">
+        <div class="game-header-content">
+            <a href="minijeux.html" class="game-back">
+                <span class="game-back-arrow">←</span>
+                <span class="game-back-text">Retour</span>
+            </a>
+            <h1 class="game-page-title">À qui le téton ?</h1>
+            <button class="game-info-btn" id="infoBtn">
+                <span>?</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="quiz-main">
+        <div class="quiz-container" id="quizContainer">
+            <!-- Le contenu du quiz sera injecté ici par JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nibards.fr - Musée Virtuel d'Art Absurde</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/navigation.js?v=2.0"></script>
+    <script src="js/main.js?v=2.0"></script>
+    <script src="js/quiz.js?v=1.0"></script>
+</body>
+</html>

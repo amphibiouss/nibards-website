@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suika Boobs | Nibards.fr</title>
+    <link rel="stylesheet" href="css/style.css?v=5.0">
+    <link rel="stylesheet" href="css/suika-mobile.css?v=1.0">
+    <link rel="icon" type="image/png" href="nibard1.png">
+    <link rel="shortcut icon" type="image/png" href="nibard1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="game-body">
+    <!-- Header minimaliste -->
+    <header class="game-header">
+        <div class="game-header-content">
+            <a href="minijeux.html" class="game-back">
+                <span class="game-back-arrow">←</span>
+                <span class="game-back-text">Retour</span>
+            </a>
+            <h1 class="game-page-title">Suika Boobs</h1>
+            <button class="game-info-btn" id="infoBtn">
+                <span>?</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Interface de jeu -->
+    <div class="game-layout">
+        <!-- Interface Mobile avec Gyroscope -->
+        <div class="game-mobile-interface">
+            <!-- Header Mobile -->
+            <div class="game-mobile-header">
+                <div class="game-mobile-stats">
+                    <div class="game-mobile-stat">
+                        <span class="game-mobile-stat-label">Score</span>
+                        <span class="game-mobile-stat-value" id="score">0</span>
+                    </div>
+                    <div class="game-mobile-stat">
+                        <span class="game-mobile-stat-label">Record</span>
+                        <span class="game-mobile-stat-value" id="bestScore">0</span>
+                    </div>
+                </div>
+                
+                <!-- Prochain fruit -->
+                <div class="game-mobile-next">
+                    <span class="game-mobile-next-label">Prochain</span>
+                    <div class="game-mobile-next-ball" id="nextPreview"></div>
+                </div>
+            </div>
+
+            <!-- Zone de jeu mobile -->
+            <div class="game-mobile-canvas-container">
+                <canvas id="gameCanvas"></canvas>
+                
+                <!-- Indicateur de position gyroscope -->
+                <div class="game-gyro-indicator" id="gyroIndicator">
+                    <div class="game-gyro-dot"></div>
+                    <div class="game-gyro-line"></div>
+                </div>
+                
+                <!-- Game Over Overlay -->
+                <div class="game-overlay" id="gameOverOverlay">
+                    <div class="game-overlay-content">
+                        <h2 class="game-overlay-title">Partie terminée</h2>
+                        <div class="game-overlay-score">
+                            <span class="game-overlay-score-label">Score final</span>
+                            <span class="game-overlay-score-value" id="finalScore">0</span>
+                        </div>
+                        <button class="game-overlay-btn" id="replayBtn">Rejouer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contrôles mobiles -->
+            <div class="game-mobile-controls">
+                <!-- Bouton de drop -->
+                <button class="game-mobile-drop-btn" id="dropBtn">
+                    <span class="game-mobile-drop-icon">🎯</span>
+                    <span class="game-mobile-drop-text">Lâcher</span>
+                </button>
+                
+                <!-- Bouton de rotation -->
+                <button class="game-mobile-rotate-btn" id="rotateBtn">
+                    <span class="game-mobile-rotate-icon">🔄</span>
+                </button>
+            </div>
+
+            <!-- Guide gyroscope -->
+            <div class="game-gyro-guide" id="gyroGuide">
+                <div class="game-gyro-guide-content">
+                    <div class="game-gyro-guide-icon">📱</div>
+                    <div class="game-gyro-guide-text">
+                        <strong>Inclinez votre téléphone</strong>
+                        <p>pour positionner le fruit</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interface Desktop (cachée sur mobile) -->
+        <div class="game-desktop-interface">
+            <!-- Colonne gauche: Scores -->
+            <aside class="game-sidebar game-sidebar-left">
+                <div class="game-stat-card">
+                    <div class="game-stat-label">Score</div>
+                    <div class="game-stat-value" id="scoreDesktop">0</div>
+                </div>
+                
+                <div class="game-stat-card">
+                    <div class="game-stat-label">Record</div>
+                    <div class="game-stat-value game-stat-value-small" id="bestScoreDesktop">0</div>
+                </div>
+            </aside>
+
+            <!-- Centre: Zone de jeu -->
+            <main class="game-main">
+                <div class="game-next-preview">
+                    <span class="game-next-label">Suivant</span>
+                    <div class="game-next-ball" id="nextPreviewDesktop"></div>
+                </div>
+                
+                <div class="game-canvas-container">
+                    <canvas id="gameCanvasDesktop"></canvas>
+                </div>
+            </main>
+
+            <!-- Colonne droite: Évolution -->
+            <aside class="game-sidebar game-sidebar-right">
+                <div class="game-evolution-card">
+                    <div class="game-evolution-label">Évolutions</div>
+                    <div class="game-evolution-grid" id="evolutionDisplay"></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Modal d'instructions -->
+    <div class="game-modal" id="infoModal">
+        <div class="game-modal-content">
+            <button class="game-modal-close" id="infoClose">×</button>
+            <h2 class="game-modal-title">Comment jouer</h2>
+            <div class="game-modal-body">
+                <div class="game-modal-rule">
+                    <span class="game-modal-rule-icon">🎯</span>
+                    <div class="game-modal-rule-text">
+                        <strong>Objectif</strong>
+                        <p>Fusionnez des nibards identiques pour les faire évoluer</p>
+                    </div>
+                </div>
+                <div class="game-modal-rule">
+                    <span class="game-modal-rule-icon">🖱️</span>
+                    <div class="game-modal-rule-text">
+                        <strong>Commandes</strong>
+                        <p>Cliquez ou touchez l'écran pour lâcher</p>
+                    </div>
+                </div>
+                <div class="game-modal-rule">
+                    <span class="game-modal-rule-icon">⚠️</span>
+                    <div class="game-modal-rule-text">
+                        <strong>Attention</strong>
+                        <p>Ne dépassez pas la ligne rouge !</p>
+                    </div>
+                </div>
+            </div>
+            <button class="game-modal-btn" id="startGameBtn">Commencer</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="js/suika-mobile.js?v=1.0"></script>
+    <script src="js/suika-boobs.js?v=7.0"></script>
+</body>
+</html>
+

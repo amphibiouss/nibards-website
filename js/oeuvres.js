@@ -9,7 +9,17 @@ async function loadOeuvres() {
     try {
         console.log('Tentative de chargement des œuvres...');
         console.log('URL demandée:', window.location.origin + '/data/oeuvres.json');
-        const response = await fetch('data/oeuvres.json');
+        
+        // Réinitialiser le cache en ajoutant un timestamp
+        const cacheBuster = `?v=${Date.now()}`;
+        const response = await fetch(`data/oeuvres.json${cacheBuster}`, {
+            cache: 'no-cache',
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
         console.log('Réponse reçue:', response);
         console.log('Status:', response.status);
         console.log('OK:', response.ok);
@@ -31,22 +41,34 @@ async function loadOeuvres() {
         
         displayOeuvres(oeuvres);
         
-        // Animation initiale des cartes
-        gsap.from('.oeuvre-card', {
-            duration: 0.8,
-            y: 50,
-            opacity: 0,
-            stagger: 0.1,
-            ease: 'power3.out'
-        });
+        // Animation initiale des cartes qui ne perturbe pas l'alignement
+        setTimeout(() => {
+            gsap.from('.oeuvre-card', {
+                duration: 0.8,
+                opacity: 0,
+                scale: 0.9,
+                stagger: 0.1,
+                ease: 'power3.out',
+                clearProps: 'all' // Nettoie les propriétés après l'animation
+            });
+        }, 100);
     } catch (error) {
         console.error('Erreur lors du chargement des œuvres:', error);
-        oeuvresContainer.innerHTML = `
-            <div class="error-message">
-                <p>Une erreur est survenue lors du chargement des œuvres.</p>
-                <p>Erreur: ${error.message}</p>
-            </div>
-        `;
+        
+        // Vérifier le type d'erreur
+        if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            handleNetworkError(error);
+        } else {
+            oeuvresContainer.innerHTML = `
+                <div class="error-message">
+                    <p>Une erreur est survenue lors du chargement des œuvres.</p>
+                    <p>Erreur: ${error.message}</p>
+                    <button onclick="reloadOeuvres()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--accent-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Réessayer
+                    </button>
+                </div>
+            `;
+        }
     }
 }
 
@@ -59,12 +81,19 @@ function displayOeuvres(oeuvresToDisplay) {
         return;
     }
     
+    // Nettoyer complètement le conteneur
     oeuvresContainer.innerHTML = '';
+    
+    // S'assurer que le conteneur est en mode grille
+    oeuvresContainer.style.display = 'grid';
+    oeuvresContainer.style.alignItems = 'start';
+    oeuvresContainer.style.justifyItems = 'center';
     
     oeuvresToDisplay.forEach(oeuvre => {
         console.log('Création de la carte pour:', oeuvre.titre);
         const card = document.createElement('div');
         card.className = 'oeuvre-card';
+        card.style.opacity = '0'; // Initialement invisible pour l'animation
         card.innerHTML = `
             <img src="${oeuvre.image}" alt="${oeuvre.titre}" loading="lazy">
             <div class="oeuvre-info">
@@ -76,6 +105,8 @@ function displayOeuvres(oeuvresToDisplay) {
         card.addEventListener('click', () => showOeuvreDetail(oeuvre));
         oeuvresContainer.appendChild(card);
     });
+    
+    console.log(`Affichage terminé: ${oeuvresToDisplay.length} œuvres`);
 }
 
 // Afficher les détails d'une œuvre
@@ -172,7 +203,7 @@ filterButtons.forEach(button => {
         gsap.to('.oeuvre-card', {
             duration: 0.3,
             opacity: 0,
-            y: 20,
+            scale: 0.9,
             stagger: 0.05,
             ease: 'power2.in',
             onComplete: () => {
@@ -180,9 +211,10 @@ filterButtons.forEach(button => {
                 gsap.from('.oeuvre-card', {
                     duration: 0.5,
                     opacity: 0,
-                    y: 20,
+                    scale: 0.9,
                     stagger: 0.05,
-                    ease: 'power2.out'
+                    ease: 'power2.out',
+                    clearProps: 'all'
                 });
             }
         });
@@ -209,11 +241,53 @@ detailModal.addEventListener('click', (e) => {
     }
 });
 
+// Fonction pour forcer le rechargement des œuvres
+function reloadOeuvres() {
+    console.log('Rechargement forcé des œuvres...');
+    oeuvres = []; // Vider le cache local
+    if (oeuvresContainer) {
+        oeuvresContainer.innerHTML = '<div class="loading-message">Chargement des œuvres...</div>';
+    }
+    loadOeuvres();
+}
+
+// Fonction pour gérer les erreurs de réseau
+function handleNetworkError(error) {
+    console.error('Erreur réseau:', error);
+    if (oeuvresContainer) {
+        oeuvresContainer.innerHTML = `
+            <div class="error-message">
+                <p>Erreur de connexion. Vérifiez votre connexion internet.</p>
+                <button onclick="reloadOeuvres()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--accent-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Réessayer
+                </button>
+            </div>
+        `;
+    }
+}
+
 // Charger les œuvres au chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM chargé, recherche du conteneur...');
     console.log('Conteneur trouvé:', document.querySelector('.oeuvres-container'));
     console.log('Modal trouvée:', document.getElementById('oeuvre-detail'));
     console.log('Boutons de filtre trouvés:', document.querySelectorAll('.filter-btn').length);
+    
+    // Ajouter un indicateur de chargement
+    if (oeuvresContainer) {
+        oeuvresContainer.innerHTML = '<div class="loading-message">Chargement des œuvres...</div>';
+    }
+    
     loadOeuvres();
-}); 
+});
+
+// Exposer la fonction de rechargement globalement
+window.reloadOeuvres = reloadOeuvres;
+
+// Fonction pour forcer le refresh de la page
+function forceRefresh() {
+    window.location.reload();
+}
+
+// Exposer la fonction de refresh globalement
+window.forceRefresh = forceRefresh; 
